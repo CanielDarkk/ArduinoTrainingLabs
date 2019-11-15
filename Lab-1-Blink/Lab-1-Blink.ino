@@ -1,23 +1,27 @@
 /* Programmer: Daniel Clark
  *  Date: 11.6.19
- *  Program: Blink
+ *  Program: digitalRead() & the Serial Port
  *  
- *  This program will turn on an LED for specified amounts of time, turn it 
- *  off, and back on in a While Loop
+ *  Reads a digital input on pin2, prints the result to the serial monitor
  */
 
-// initialize our led to Pin 13
-int led = 13;
- 
+//digital pin2 has a push button attached to it
+int pushButton = 2;
+
 void setup() {
-  // Using the Function pinmode to call the variable led and provide Output
-  pinMode(led, OUTPUT);
+  //initializes serial commmunication at 9600 bits per second
+  Serial.begin(9600);
+  //make the pushBotto pin an input
+  pinMode(pushButton, INPUT);
+  
+  
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  digitalWrite(led, HIGH);
-  delay(5000);
-  digitalWrite(led, LOW);
-  delay(5000);
-}                                                                                                 
+  // read the input pin
+  int buttonState = digitalRead(pushButton);
+  // print out the state of the button
+  Serial.println(buttonState);
+  delay(250); // delay in between readings for stability
+
+}
