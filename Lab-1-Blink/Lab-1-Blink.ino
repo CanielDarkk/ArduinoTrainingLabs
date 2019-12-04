@@ -9,12 +9,13 @@
 int pushButton = 2;
 
 void setup() {
+  // Using the Function pinMode to call the variable led and provide Output
+  pinMode(led, OUTPUT);
+  
   //initializes serial commmunication at 9600 bits per second
   Serial.begin(9600);
   //make the pushBotto pin an input
-  pinMode(pushButton, INPUT);
-  
-  
+  pinMode(pushButton, INPUT); 
 }
 
 void loop() {
@@ -22,6 +23,13 @@ void loop() {
   int buttonState = digitalRead(pushButton);
   // print out the state of the button
   Serial.println(buttonState);
-  delay(250); // delay in between readings for stability
+  // if buttonState is Ture/Pushed by human the LED with Blink
+  if (buttonState==HIGH({
+    digitalWrite(led, HIGH);
+    delay(1500);
+    digitalWrite(led, LOW);
+    delay(500);
+  }
+  delay(1); // delay in between readings for stability
 
 }
