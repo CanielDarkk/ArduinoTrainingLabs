@@ -1,16 +1,19 @@
 /* Programmer: Daniel Clark
    Date: 12.3.9
-   Program: Potentiometer
+   Program: LED & Potentiometer
 
-   AnalogReadSerial
-   Reads an analog input on pin A0, prints to the serial monitor
+   Read analog port and turn on LED at a determined threshold
 
-   Update: 12.10.19
-   Add serial read to be able to read voltages from 0 to 5 volts
-   
 */
 
+const int analogPin = A0;
+const int ledPin = 13;
+float threshold = 2.25;
+
 void setup() {
+  //initialize the LED pin as an output
+  pinMode(ledPin, OUTPUT);
+  
   // initialize the serial communication at 9600 bits per second
   Serial.begin(9600);
 }
@@ -24,6 +27,14 @@ void loop() {
 
   //  print the value of our potentiometer
   Serial.println(voltage);
+
+  // if the analog value is high than threshold variable it will turn on the LED
+  if (voltage > threshold) {
+    digitalWrite(ledPin, HIGH);
+  }
+  else {
+    digitalWrite(ledPin, LOW);
+  }
 
   //add a delay for stability
   delay(1);
